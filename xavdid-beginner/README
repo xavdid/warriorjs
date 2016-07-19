@@ -1,17 +1,18 @@
-Level 3
+Level 4
 
-The air feels thicker than before. There must be a horde of sludge.
+You can hear bow strings being stretched.
 
-Tip: Be careful not to die! Use `warrior.health()` to keep an eye on your health, and `warrior.rest()` to earn 10% of max health back.
+Tip: No new abilities this time, but you must be careful not to rest while taking damage. Save a `_health` variable and compare it on each turn to see if you're taking damage.
 
 
-╔═════════╗
-║@ s ss s>║
-╚═════════╝
+╔═══════╗
+║@ Sa S>║
+╚═══════╝
 
   > = stairs
   @ = xavdid
-  s = sludge
+  a = archer
+  S = thickSludge
 
 
 Warrior abilities:
@@ -22,9 +23,9 @@ Warrior abilities:
 
   warrior.feel()
 
-  warrior.health() (NEW!)
+  warrior.health()
 
-  warrior.rest() (NEW!)
+  warrior.rest()
 
 
 When you're done editing Player.js, run the warriorjs command again.
