@@ -1,25 +1,30 @@
-Level 2
+Level 3
 
-It is too dark to see anything, but you smell sludge nearby.
+The air feels thicker than before. There must be a horde of sludge.
 
-Tip: Use `warrior.feel().isEmpty()` to see if there is anything in front of you, and `warrior.attack()` to fight it. Remember, you can only do one action per turn.
+Tip: Be careful not to die! Use `warrior.health()` to keep an eye on your health, and `warrior.rest()` to earn 10% of max health back.
 
 
-╔════════╗
-║@   s  >║
-╚════════╝
+╔═════════╗
+║@ s ss s>║
+╚═════════╝
 
   > = stairs
   @ = xavdid
+  s = sludge
 
 
 Warrior abilities:
 
   warrior.walk()
 
-  warrior.attack() (NEW!)
+  warrior.attack()
 
-  warrior.feel() (NEW!)
+  warrior.feel()
+
+  warrior.health() (NEW!)
+
+  warrior.rest() (NEW!)
 
 
 When you're done editing Player.js, run the warriorjs command again.
