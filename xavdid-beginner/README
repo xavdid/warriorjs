@@ -1,12 +1,12 @@
-Level 1
+Level 2
 
-You see before yourself a long hallway with stairs at the end. There is nothing in the way.
+It is too dark to see anything, but you smell sludge nearby.
 
-Tip: Call `warrior.walk()` to walk forward in the Player `playTurn` method.
+Tip: Use `warrior.feel().isEmpty()` to see if there is anything in front of you, and `warrior.attack()` to fight it. Remember, you can only do one action per turn.
 
 
 ╔════════╗
-║@      >║
+║@   s  >║
 ╚════════╝
 
   > = stairs
@@ -15,7 +15,11 @@ Tip: Call `warrior.walk()` to walk forward in the Player `playTurn` method.
 
 Warrior abilities:
 
-  warrior.walk() (NEW!)
+  warrior.walk()
+
+  warrior.attack() (NEW!)
+
+  warrior.feel() (NEW!)
 
 
 When you're done editing Player.js, run the warriorjs command again.
