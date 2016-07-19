@@ -15,6 +15,8 @@ class Player {
         // console.log('walking')
         warrior.walk()
       }
+    } else if (warrior.feel().isCaptive()) {
+      warrior.rescue()
     } else {
       // console.log('attacking')
       warrior.attack()

@@ -1,18 +1,19 @@
-Level 4
+Level 5
 
-You can hear bow strings being stretched.
+You hear cries for help. Captives must need rescuing.
 
-Tip: No new abilities this time, but you must be careful not to rest while taking damage. Save a `_health` variable and compare it on each turn to see if you're taking damage.
+Tip: Use `warrior.feel().isCaptive()` to see if there is a captive and `warrior.rescue()` to rescue him. Don't attack captives.
 
 
 ╔═══════╗
-║@ Sa S>║
+║@ CaaSC║
 ╚═══════╝
 
   > = stairs
   @ = xavdid
   a = archer
   S = thickSludge
+  C = captive
 
 
 Warrior abilities:
@@ -26,6 +27,8 @@ Warrior abilities:
   warrior.health()
 
   warrior.rest()
+
+  warrior.rescue() (NEW!)
 
 
 When you're done editing Player.js, run the warriorjs command again.
