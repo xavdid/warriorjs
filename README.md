@@ -6,3 +6,4 @@ Each commit is my solution for that tower (`beginner`|`intermediate`) and level,
 
 These are by no way optimal, probably.
 
+Needless to say, this will contain spoilers for the game!
