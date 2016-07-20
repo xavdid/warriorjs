@@ -7,3 +7,5 @@ Each commit is my solution for that tower (`beginner`|`intermediate`) and level,
 These are by no way optimal, probably.
 
 Needless to say, this will contain spoilers for the game!
+
+_Note_: This was played under `v3.0.0` of warriorjs. Not sure if the puzzles or other mechanics will change, but these were at least valid at some point. 
