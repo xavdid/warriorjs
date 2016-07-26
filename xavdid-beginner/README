@@ -1,19 +1,18 @@
-Level 5
+Level 6
 
-You hear cries for help. Captives must need rescuing.
+The wall behind you feels a bit further away in this room. And you hear more cries for help.
 
-Tip: Use `warrior.feel().isCaptive()` to see if there is a captive and `warrior.rescue()` to rescue him. Don't attack captives.
+Tip: You can walk backward by passing `'backward'` as an argument to `walk()`. Same goes for `feel()`, `rescue()` and `attack()`. Archers have a limited attack distance.
 
 
-╔═══════╗
-║@ CaaSC║
-╚═══════╝
+╔════════╗
+║C @ S aa║
+╚════════╝
 
   > = stairs
   @ = xavdid
-  a = archer
   S = thickSludge
-  C = captive
+  a = archer
 
 
 Warrior abilities:
@@ -28,7 +27,7 @@ Warrior abilities:
 
   warrior.rest()
 
-  warrior.rescue() (NEW!)
+  warrior.rescue()
 
 
 When you're done editing Player.js, run the warriorjs command again.

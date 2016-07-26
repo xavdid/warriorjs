@@ -1,25 +1,49 @@
+const maxHealth = 20
 class Player {
   constructor () {
     this._health = 20
-    this._healTo = 15
+    this._tooLow = 12
     this._turn = 1
+    // only save what we need
+    this._captives = 1
+    // full heal once per level
+    // this._full = false
+    this._healing = false
   }
 
   playTurn (warrior) {
     // console.log(`** Begin turn ${this._turn}`)
-    if (warrior.feel().isEmpty()) {
-      if (warrior.health() < this._healTo && !this.underAttack(warrior)) {
-        // console.log('healing!')
-        warrior.rest()
+    if (this._captives > 0) {
+      if (warrior.feel('backward').isEmpty()) {
+        warrior.walk('backward')
       } else {
-        // console.log('walking')
-        warrior.walk()
+        warrior.rescue('backward')
+        this._captives -= 1
       }
-    } else if (warrior.feel().isCaptive()) {
-      warrior.rescue()
     } else {
-      // console.log('attacking')
-      warrior.attack()
+      // no captives left
+      if (warrior.feel().isEmpty()) {
+        if (warrior.health() < this._tooLow || this._healing) {
+          if (this.underAttack(warrior)) {
+            warrior.walk('backward')
+          } else {
+            // console.log('healing!')
+            warrior.rest()
+            this._healing = true
+            if (warrior.health() === maxHealth) {
+              this._healing = false
+            }
+          }
+        } else {
+          // console.log('walking')
+          warrior.walk()
+        }
+      } else if (warrior.feel().isCaptive()) {
+        warrior.rescue()
+      } else {
+        // console.log('attacking')
+        warrior.attack()
+      }
     }
     // console.log('cleaning')
     this.cleanup(warrior)
