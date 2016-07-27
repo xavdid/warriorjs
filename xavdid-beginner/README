@@ -1,17 +1,17 @@
-Level 7
+Level 8
 
-You feel a wall right in front of you and an opening behind you.
+You hear the mumbling of wizards. Beware of their deadly wands! Good thing you found a bow.
 
-Tip: You are not as effective at attacking backward. Use `warrior.feel().isWall()` and `warrior.pivot()` to turn around.
+Tip: Use `warrior.look()` to determine your surroundings, and `warrior.shoot()` to fire an arrow.
 
 
 ╔══════╗
-║>a S @║
+║@ Cww>║
 ╚══════╝
 
   > = stairs
   @ = xavdid
-  S = thickSludge
+  w = wizard
 
 
 Warrior abilities:
@@ -28,7 +28,11 @@ Warrior abilities:
 
   warrior.rescue()
 
-  warrior.pivot() (NEW!)
+  warrior.pivot()
+
+  warrior.look() (NEW!)
+
+  warrior.shoot() (NEW!)
 
 
 When you're done editing Player.js, run the warriorjs command again.

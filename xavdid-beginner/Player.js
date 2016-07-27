@@ -1,5 +1,5 @@
 const maxHealth = 20
-class Player {
+class Player { // eslint-disable-line no-unused-vars
   constructor () {
     this._health = 20
     this._tooLow = 12
@@ -26,6 +26,8 @@ class Player {
             this._healing = false
           }
         }
+      } else if (this.enemyIsInSight(warrior)) {
+        warrior.shoot()
       } else {
         // console.log('walking')
         warrior.walk()
@@ -55,5 +57,10 @@ class Player {
   underAttack (warrior) {
     // console.log(`_health: ${this._health} | current health: ${warrior.health()}`)
     return this._health > warrior.health()
+  }
+
+  enemyIsInSight (warrior) {
+    const unit = warrior.look().find(space => !space.isEmpty())
+    return unit && unit.isEnemy()
   }
 }
