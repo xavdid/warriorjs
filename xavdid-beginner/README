@@ -1,17 +1,20 @@
-Level 8
+Level 9
 
-You hear the mumbling of wizards. Beware of their deadly wands! Good thing you found a bow.
+Time to hone your skills and apply all of the abilities that you have learned.
 
-Tip: Use `warrior.look()` to determine your surroundings, and `warrior.shoot()` to fire an arrow.
+Tip: Watch your back.
 
 
-╔══════╗
-║@ Cww>║
-╚══════╝
+╔═══════════╗
+║>Ca  @ S wC║
+╚═══════════╝
 
   > = stairs
   @ = xavdid
+  a = archer
+  S = thickSludge
   w = wizard
+  C = captive
 
 
 Warrior abilities:
@@ -30,9 +33,9 @@ Warrior abilities:
 
   warrior.pivot()
 
-  warrior.look() (NEW!)
+  warrior.look()
 
-  warrior.shoot() (NEW!)
+  warrior.shoot()
 
 
 When you're done editing Player.js, run the warriorjs command again.
