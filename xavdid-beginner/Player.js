@@ -21,9 +21,10 @@ class Player { // eslint-disable-line no-unused-vars
       // do nothing, acted already
     } else if (this.didHeal(warrior)) {
       // do nothing, acted already
-    } else if (warrior.feel().isCaptive() && this._captives > 0) {
-      warrior.rescue()
-      this._captives -= 1
+    } else if (this.didHelpCaptive(warrior)) {
+      // do nothing, acted already
+      // && this._captives > 0
+      // this._captives -= 1
     } else if (warrior.feel().isWall()) {
       warrior.pivot()
     } else {
@@ -77,6 +78,32 @@ class Player { // eslint-disable-line no-unused-vars
     }
   }
 
+  didHelpCaptive (warrior) {
+    let dir = false
+    let acted = false
+    directions.forEach(d => {
+      if (warrior.feel(d).isCaptive()) {
+        warrior.rescue(d)
+        acted = true
+      }
+    })
+
+    if (acted) { return true }
+
+    directions.forEach(d => {
+      if (this.captiveIsInSight(warrior, d) && !dir) {
+        dir = d
+      }
+    })
+
+    if (dir) {
+      warrior.walk(dir)
+      return true
+    } else {
+      return false
+    }
+  }
+
   // action checks
   underAttack (warrior) {
     // console.log(`_health: ${this._health} | current health: ${warrior.health()}`)
@@ -87,6 +114,11 @@ class Player { // eslint-disable-line no-unused-vars
   enemyIsInSight (warrior, direction) {
     const unit = warrior.look(direction).find(space => !space.isEmpty())
     return unit && unit.isEnemy()
+  }
+
+  captiveIsInSight (warrior, direction) {
+    const unit = warrior.look(direction).find(space => !space.isEmpty())
+    return unit && unit.isCaptive()
   }
 
   // returns false or the direction to pivot
