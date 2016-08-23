@@ -1,5 +1,5 @@
 // const maxHealth = 20
-const directions = ['forward', 'backward', 'left', 'right']
+const directions = ['forward', 'right', 'backward', 'left']
 // const util = require('util')
 
 class Player { // eslint-disable-line no-unused-vars
@@ -8,22 +8,21 @@ class Player { // eslint-disable-line no-unused-vars
     this._tooLow = 12
     this._healTo = 17
     this._turn = 1
-    this._captives = 0
+    this._captives = 1
     this._healing = false
   }
 
   playTurn (warrior) {
     // console.log(`** Begin turn ${this._turn}`)
-    if (this.didAttack(warrior)) {
+    // clear captives first, so anything left must be an enemy
+    if (this._captives > 0 && this.didHelpCaptive(warrior)) {
+      // do nothing, acted already
+    } else if (this.didAttack(warrior)) {
       // do nothing, acted already
     } else if (this.didHeal(warrior)) {
       // do nothing, acted already
-    } else if (this._captives > 0 && this.didHelpCaptive(warrior)) {
-      // do nothing, acted already
-      // && this._captives > 0
-      // this._captives -= 1
       // } else if (warrior.feel().isWall()) {
-      //   warrior.pivot()
+      // warrior.pivot()
     } else {
       // basic action
       warrior.walk(warrior.directionOfStairs())
@@ -43,10 +42,27 @@ class Player { // eslint-disable-line no-unused-vars
   didAttack (warrior) {
     // look for adjacent enemies to fight, then shoot at the farthest ones
     let enemyDir = this.adjacentEnemyDirection(warrior)
-    if (enemyDir) {
-      warrior.attack(enemyDir)
+    if (enemyDir && this.numAdjacentEnemies(warrior) > 1) {
+      warrior.bind(enemyDir)
+      return true
+    } else if (warrior.health() < 5 && this.didHeal(warrior)) {
       return true
     } else {
+      if (enemyDir) {
+        warrior.attack(enemyDir)
+        return true
+      } else {
+        let captiveDir = this.adjacentCaptiveDirection(warrior)
+        if (captiveDir && this._captives === 0) {
+          // don't get too low- if everyone is bound, take time to heal
+          if (this.didHeal(warrior)) {
+            // acted, do nothing
+          } else {
+            warrior.attack(captiveDir)
+          }
+          return true
+        }
+      }
       // can't shoot yet
       // enemyDir = this.furthestEnemyDirection(warrior)
       // if (enemyDir) {
@@ -58,10 +74,17 @@ class Player { // eslint-disable-line no-unused-vars
     }
   }
 
+  // handles retreating and heading
   didHeal (warrior) {
     if (warrior.health() < this._tooLow || this._healing) {
       if (this.underAttack(warrior)) {
-        warrior.walk('backward')
+        let retreatDir
+        if (this.opposite(this.adjacentEnemyDirection(warrior)).isEmpty()) {
+          retreatDir = this.opposite(this.adjacentEnemyDirection(warrior))
+        } else {
+          retreatDir = this.opposite(warrior.directionOfStairs())
+        }
+        warrior.walk(retreatDir)
         return true
       } else {
         warrior.rest()
@@ -82,6 +105,7 @@ class Player { // eslint-disable-line no-unused-vars
     directions.forEach(d => {
       if (warrior.feel(d).isCaptive()) {
         warrior.rescue(d)
+        this._captives -= 1
         acted = true
       }
     })
@@ -130,6 +154,21 @@ class Player { // eslint-disable-line no-unused-vars
     return dir
   }
 
+  // number of adjacent enemies
+  numAdjacentEnemies (warrior) {
+    return directions.map(d => warrior.feel(d).isEnemy()).filter(d => d).length
+  }
+
+  adjacentCaptiveDirection (warrior) {
+    let dir = false
+    directions.forEach(d => {
+      if (warrior.feel(d).isCaptive() && !dir) {
+        dir = d
+      }
+    })
+    return dir
+  }
+
   distanceToEnemy (warrior, look) {
     return look.findIndex(i => i.isEnemy())
   }
@@ -147,5 +186,9 @@ class Player { // eslint-disable-line no-unused-vars
     })
 
     return furthestEnemyDirection
+  }
+
+  opposite (dir) {
+    return directions[(directions.indexOf(dir) + 2) % 4]
   }
 }
